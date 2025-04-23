@@ -1,0 +1,56 @@
+[project]
+name = "c4a0"
+version = "0.1.0"
+description = ""
+authors = [{ name = "Advait Shinde", email = "advait.shinde@gmail.com" }]
+dependencies = [
+  "pytorch-lightning>=2.5.0",
+  "numpy>=2.2.3",
+  "einops>=0.8.1",
+  "torchmetrics>=1.6.2",
+  "tensorboardx>=2.6.2.2",
+  "tensorboard>=2.19.0",
+  "tqdm>=4.67.1",
+  "jupyterlab>=4.3.5",
+  "pydantic>=2.10.6",
+  "tabulate>=0.9.0",
+  "matplotlib>=3.10.1",
+  "maturin>=1.8.2",
+  "loguru>=0.7.3",
+  "typer>=0.15.2",
+  "optuna>=4.2.1",
+  "optuna-dashboard>=0.17.0",
+]
+readme = "README.md"
+requires-python = ">= 3.11"
+
+[build-system]
+requires = ["maturin>=1,<2"]
+build-backend = "maturin"
+
+[tool.uv]
+managed = true
+dev-dependencies = [
+  "pytest>=8.3.5",
+  "pytest-asyncio>=0.25.3",
+  "pyright>=1.1.396",
+  "jupyterlab>=4.0.10",
+  "pandas>=2.1.4",
+  "rankit>=0.3.3",
+  "ruff>=0.9.9",
+]
+
+[tool.pyright]
+typeCheckingMode = "basic"
+extraPaths = ["src", "tests"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+filterwarnings = [
+  # Disable warnings we get form pytorch lightning that clutter pytest output
+  "ignore:pkg_resources is deprecated.*:DeprecationWarning",
+  "ignore:Deprecated call to `pkg_resources.declare_namespace`.*:DeprecationWarning",
+  "ignore:Deprecated call to `pkg_resources.declare_namespace.*:DeprecationWarning",
+  "ignore:You are trying to `self.log()` but the `self.trainer` reference is not registered on the model yet.*",
+]
